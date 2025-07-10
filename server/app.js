@@ -4,13 +4,8 @@ import { Pool } from "pg";
 
 dotenv.config();
 
-const pool = new Pool({
-  connectionString:
-    "postgresql://mmejia:ed25f127e2e551e0@localhost:5432/mini_journal",
-});
-
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 6660;
 
 async function carajo() {
   const { rows } = await pool.query("SELECT * FROM carajo");
