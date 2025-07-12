@@ -7,8 +7,9 @@ import { logPool, postPool } from "../data/connections.js";
  */
 async function userExist(email) {
   try {
-    const query = `SELECT COUNT(*) FROM log_users WHERE mail = $1`;
+    const query = `SELECT COUNT(*) FROM log_users WHERE email = $1`;
     const { rows } = await logPool.query(query, [email]);
+    console.log(parseInt(rows[0].count) > 0, parseInt(rows[0].count));
     return parseInt(rows[0].count) > 0;
   } catch (err) {
     console.error("Error al verificar si el usuario existe:", err);
@@ -38,18 +39,28 @@ export async function setUser(req, res, next) {
     return next();
   }
 
-  const query_log = `
+  const queryLog = `
 	INSERT INTO log_users (email, password, username) 
 	VALUES ($1, $2, $3)
-	RETURNS *`;
+	RETURNING *`;
 
-  const query_users = `
+  const queryDeleteLog = `
+	DELETE FROM log_users
+	WHERE email = $1
+	RETURNING *`;
+
+  const queryUsers = `
 	INSERT INTO users (username) 
 	VALUES ($1)
-	RETURNS *`;
+	RETURNING *`;
+
+  const queryDeleteUser = `
+	DELETE FROM users
+	WHERE username = $1
+	RETURNING *`;
 
   try {
-    const { rows: createdLogin } = await logPool(query_log, [
+    const { rows: createdLogin } = await logPool.query(queryLog, [
       email,
       password,
       username,
@@ -59,7 +70,7 @@ export async function setUser(req, res, next) {
       throw new Error("cannot create loggin");
     }
 
-    const { rows: createdUser } = await postPool(query_users, [username]);
+    const { rows: createdUser } = await postPool.query(queryUsers, [username]);
 
     if (createdUser.length === 0) {
       throw new Error("cannot create user");
@@ -68,6 +79,11 @@ export async function setUser(req, res, next) {
     res.successMessage = "User created successfully";
     res.success = true;
   } catch (err) {
+    console.log("por el catch");
+
+    await logPool.query(queryDeleteLog, [email]);
+    await postPool.query(queryDeleteUser, [username]);
+
     res.successMessage = err;
   } finally {
     next();

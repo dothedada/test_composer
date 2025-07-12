@@ -1,10 +1,10 @@
 services:
   db_log:
     image: postgres
-    container_name: log_db
+    container_name: auth_db
     restart: no
     environment:
-      POSTGRES_DB: log_users
+      POSTGRES_DB: auth_db
       POSTGRES_USER: mmejia
       POSTGRES_PASSWORD: ed25f127e2e551e0
     ports:
@@ -20,7 +20,7 @@ services:
     container_name: posts_db
     restart: no
     environment:
-      POSTGRES_DB: post_users
+      POSTGRES_DB: posts_db
       POSTGRES_USER: mmejia
       POSTGRES_PASSWORD: ed25f127e2e551e0
     ports:

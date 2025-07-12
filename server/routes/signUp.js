@@ -7,11 +7,11 @@ signUpRoute.get("/", (req, res) => {
   res.render("signUp");
 });
 
-signUpRoute.post(setUser, (req, res) => {
+signUpRoute.post("/", setUser, (req, res) => {
   if (res.success) {
-    res.send("creado");
+    res.send(`creado: ${res.successMessage}`);
   } else {
-    res.send("no creado");
+    res.send(`no creado: ${res.successMessage}`);
   }
 });
 
