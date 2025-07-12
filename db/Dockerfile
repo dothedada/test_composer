@@ -2,6 +2,6 @@ FROM postgres
 
 ENV POSTGRES_DB=mini_journal \
 	POSTGRES_USER=mmejia \
-	POSTGRES_PASSWORD=ed25f127e2e551e0
+	POSTGRES_PASSWORD=ed25f127e2e551e0 # Overwrite in production
 
 EXPOSE 5432
