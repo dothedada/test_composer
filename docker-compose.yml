@@ -1,0 +1,39 @@
+services:
+  db_log:
+    image: postgres
+    container_name: log_db
+    restart: no
+    environment:
+      POSTGRES_DB: log_users
+      POSTGRES_USER: mmejia
+      POSTGRES_PASSWORD: ed25f127e2e551e0
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_log_data:/var/lib/postgresql/data
+      - ./db/db_log_init:/docker-entrypoint-initdb.d
+    networks:
+      - journal
+
+  db_posts:
+    image: postgres
+    container_name: posts_db
+    restart: no
+    environment:
+      POSTGRES_DB: post_users
+      POSTGRES_USER: mmejia
+      POSTGRES_PASSWORD: ed25f127e2e551e0
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_post_data:/var/lib/postgresql/data
+      - ./db/db_post_init:/docker-entrypoint-initdb.d
+    networks:
+      - journal
+
+networks:
+  journal:
+
+volumes:
+  db_post_data:
+  db_log_data:

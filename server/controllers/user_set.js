@@ -1,4 +1,4 @@
-import { logPool } from "../data/connections.js";
+import { logPool, postPool } from "../data/connections.js";
 
 /**
  * Checks if a user exists based on the email
@@ -21,34 +21,54 @@ async function userExist(email) {
  */
 export async function setUser(req, res, next) {
   const { email, password, password_confirm, username } = req.body;
+  res.success = false;
 
   if (!email || !password || !password_confirm || !username) {
-    console.log("carajo");
+    res.successMessage = "Missing data";
     return next();
   }
 
   if (await userExist(email)) {
-    console.log("ya estubo");
+    res.successMessage = "Already exists";
     return next();
   }
 
   if (password !== password_confirm) {
-    console.log("no hay ");
+    res.successMessage = "Not matching passwords";
+    return next();
   }
 
-  const query = `
+  const query_log = `
 	INSERT INTO log_users (email, password, username) 
 	VALUES ($1, $2, $3)
 	RETURNS *`;
 
+  const query_users = `
+	INSERT INTO users (username) 
+	VALUES ($1)
+	RETURNS *`;
+
   try {
-    const { rows } = logPool(query, [email, password, username]);
-    if (rows.length === 0) {
+    const { rows: createdLogin } = await logPool(query_log, [
+      email,
+      password,
+      username,
+    ]);
+
+    if (createdLogin.length === 0) {
+      throw new Error("cannot create loggin");
+    }
+
+    const { rows: createdUser } = await postPool(query_users, [username]);
+
+    if (createdUser.length === 0) {
       throw new Error("cannot create user");
     }
+
+    res.successMessage = "User created successfully";
     res.success = true;
   } catch (err) {
-    console.error("paila", err);
+    res.successMessage = err;
   } finally {
     next();
   }

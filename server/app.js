@@ -31,7 +31,7 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/login", loginRoute);
-app.use("/sign-up", signUpRoute);
+// app.use("/sign-up", signUpRoute);
 
 app.listen(PORT, () => {
   console.log("Listening in port", PORT);

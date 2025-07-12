@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS users (
 	id SERIAL PRIMARY KEY,
-	username VARCHAR(255) UNIQUE NOT NULL,
+	username VARCHAR(255) NOT NULL,
 	created_at DATE DEFAULT CURRENT_DATE NOT NULL,
 	last_loggin DATE DEFAULT CURRENT_DATE NOT NULL
 );
@@ -16,5 +16,5 @@ CREATE TABLE IF NOT EXISTS user_posts (
 	REFERENCES users(id)
 	ON DELETE CASCADE,
 	CONSTRAINT unique_user_post_per_day
-	UNIQUE (user_id, date)
+	UNIQUE (user_id, post_date)
 );
