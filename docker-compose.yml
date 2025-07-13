@@ -1,6 +1,6 @@
 services:
   db_log:
-    image: postgres
+    image: postgres:17.5-alpine3.22
     container_name: auth_db
     restart: no
     environment:
@@ -16,7 +16,7 @@ services:
       - journal
 
   db_posts:
-    image: postgres
+    image: postgres:17.5-alpine3.22
     container_name: posts_db
     restart: no
     environment:
@@ -30,6 +30,11 @@ services:
       - ./db/db_post_init:/docker-entrypoint-initdb.d
     networks:
       - journal
+
+  # node_server:
+  #   image: node:24-alpine3.21
+  #   container_name: journal_server
+  #   restart: no
 
 networks:
   journal:
