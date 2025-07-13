@@ -1,6 +1,7 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { logPool } from "../data/connections.js";
+import bcrypt from "bcryptjs";
 
 const strategy = new LocalStrategy(
   { usernameField: "email" },
@@ -16,7 +17,8 @@ const strategy = new LocalStrategy(
         return done(null, false, { message: "invalid email or password1" });
       }
 
-      if (user.password !== password) {
+      const match = await bcrypt.compare(password, user.password);
+      if (!match) {
         return done(null, false, { message: "invalid email or password2" });
       }
 

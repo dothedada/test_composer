@@ -12,6 +12,7 @@ loginRoute.post(
   passport.authenticate("local", {
     successRedirect: "https://google.com",
     failureRedirect: "/",
+    failureMessage: "paila",
   }),
 );
 

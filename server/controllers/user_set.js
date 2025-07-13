@@ -1,10 +1,6 @@
 import { logPool, postPool } from "../data/connections.js";
+import bcrypt from "bcryptjs";
 
-/**
- * Checks if a user exists based on the email
- * @param {string} email - The email to verify
- * @return {Promise<boolean>} - True if the user exist, otherwise false
- */
 async function userExist(email) {
   try {
     const query = `SELECT COUNT(*) FROM log_users WHERE email = $1`;
@@ -17,9 +13,11 @@ async function userExist(email) {
   }
 }
 
-/**
- * Middleware that sets a new user
- */
+async function hashPassword(password) {
+  const hashedPassword = await bcrypt.hash(password, 10);
+  return hashedPassword;
+}
+
 export async function setUser(req, res, next) {
   const { email, password, password_confirm, username } = req.body;
   res.success = false;
@@ -62,7 +60,7 @@ export async function setUser(req, res, next) {
   try {
     const { rows: createdLogin } = await logPool.query(queryLog, [
       email,
-      password,
+      await hashPassword(password),
       username,
     ]);
 
@@ -79,8 +77,6 @@ export async function setUser(req, res, next) {
     res.successMessage = "User created successfully";
     res.success = true;
   } catch (err) {
-    console.log("por el catch");
-
     await logPool.query(queryDeleteLog, [email]);
     await postPool.query(queryDeleteUser, [username]);
 
