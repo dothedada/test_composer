@@ -31,7 +31,13 @@ services:
     networks:
       - journal
 
-  # node_server:
+  # backend:
+  #   build:
+  #     context: ./server
+  #     dockerfile: DOckerfile
+  #   ports:
+  #
+  #
   #   image: node:24-alpine3.21
   #   container_name: journal_server
   #   restart: no
