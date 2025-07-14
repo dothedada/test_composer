@@ -1,4 +1,16 @@
 import { hashPassword } from "../services/authService.js";
+import { logPool, postPool } from "../data/connections.js";
+
+export async function checkUsername(username) {
+  const query = `SELECT * FROM users WHERE username = $1`;
+
+  try {
+    const { rows } = await postPool.query(query, [username]);
+    return rows.length > 0;
+  } catch (err) {
+    console.error("Cannot check user", err);
+  }
+}
 
 export async function userExists(userData) {
   const { email, username } = userData;

@@ -3,8 +3,8 @@ import {
   createUserProfile,
   rollbackUserCreation,
   userExists,
-} from "../services/userService";
-import { validateUserInput } from "../utils/validations";
+} from "../services/userService.js";
+import { validateUserInput } from "../utils/validations.js";
 
 export async function setUser(req, res, next) {
   res.success = false;

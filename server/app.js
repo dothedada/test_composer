@@ -1,13 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
-import session from "express-session";
 import passport from "passport";
 import path from "path";
 import { fileURLToPath } from "url";
+import cors from "cors";
+import bodyParser from "body-parser";
 
 import { loginRoute } from "./routes/login.js";
 import { signUpRoute } from "./routes/signUp.js";
 import { configurePassport } from "./config/passport.js";
+import { loggedRoute } from "./routes/logged.js";
 
 dotenv.config();
 
@@ -17,24 +19,37 @@ export const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 6660;
 
+app.use(bodyParser.json());
+const allowedDomains = ["http://localhost:5173"];
 app.use(
-  session({
-    secret: process.env.HASHER || "Lucy Fer Nanda",
-    resave: false,
-    saveUninitialized: false,
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedDomains.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by cors"), false);
+      }
+    },
+    methods: ["GET", "POST", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
 
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-
 configurePassport();
 app.use(passport.initialize());
-app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/login", loginRoute);
-app.use("/sign-up", signUpRoute);
+app.use(express.static("/public"));
+app.use("/api/logged", loggedRoute);
+app.use("/api/login", loginRoute);
+app.use("/api/sign-up", signUpRoute);
+app.use("/", (req, res) => {
+  if (req.isUnauthenticated()) {
+    res.redirect("/login");
+    return;
+  }
+  res.send(req.user);
+});
 
 app.listen(PORT, () => {
   console.log("Listening in port", PORT);

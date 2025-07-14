@@ -4,7 +4,7 @@ import { logPool } from "../data/connections.js";
 import bcrypt from "bcryptjs";
 
 const strategy = new LocalStrategy(
-  { usernameField: "email" },
+  { usernameField: "email", passwordField: "password" },
   async (email, password, done) => {
     try {
       const { rows } = await logPool.query(
@@ -42,7 +42,7 @@ export function configurePassport() {
         "SELECT * FROM log_users WHERE username = $1",
         [username],
       );
-      const user = rows[0];
+      const user = rows[0].username;
 
       done(null, user);
     } catch (err) {
