@@ -13,29 +13,29 @@ La idea detrás de las herramientas de contenedorización es permitirnos empaque
     * [Paso a paso](#paso-a-paso)
 
 2. [Conceptos](#conceptos)
-    * [¿Para qué la contenedorización?](#para-qué-la-contenedorizacion)
+    * [¿Para qué la contenedorización?](#para-qué-la-contenedorización)
     * [Intro: Máquinas, VM y Contenedores](#intro-máquinas-vm-y-contenedores)
     * [¿Cómo funciona esto?](#cómo-funciona-esto)
-        * [AIUUURAAA (_--help_)](#aiuuuraaa-help)
+        * [AIUUURAAA (_--help_)](#aiuuuraaa---help)
         * [Los planos (imágenes o _images_)](#los-planos-imágenes-o-images)
         * [Cosas que no queremos contenedorizar (_dockerignore_)](#cosas-que-no-queremos-contenedorizar-dockerignore)
-        * [La ejecución (los contenedores)](#containers)
-        * [La memoria (los volúmenes o _volumes_)](#volumes)
-        * [Rendimiento y publicación](#rendimiento-y-publicacion)
-    * [Dentro del Contenedor (_exec_)](#exec)
-    * [Por fuera del contenedor (Red o _network_)](#network)
+        * [La ejecución (los contenedores)](#la-ejecución-los-contenedores)
+        * [La memoria (los volúmenes o _volumes_)](#la-memoria-los-volúmenes-o-volumes)
+        * [Rendimiento y publicación](#rendimiento-y-publicación)
+    * [Dentro del Contenedor (_exec_)](#dentro-del-contenedor-terminalception-o-exec)
+    * [Por fuera del contenedor (Red o _network_)](#por-fuera-del-contenedor-redes-o-networks)
 
-3. [Composición y Orquestación con Docker (_compose_)](#compose)
-    * [El archivo `docker-compose.yml`](#docker-compose)
-        * [La importancia de los nombres en la composición](#compose-paths)
+3. [Composición y Orquestación con Docker (_compose_)](#composición-y-orquestación-con-docker-compose)
+    * [El archivo `docker-compose.yml`](#el-archivo-docker-composeyml)
+        * [La importancia de los nombres en la composición](#la-importancia-de-los-nombres-en-la-composición)
     * [Comandos de Docker Compose](#comandos-de-docker-compose)
 
 4. [Recomendaciones](#recomendaciones)
 5. [Resumen de Comandos](#resumen-de-comandos)
-    * [Gestión de Imágenes](#gestion-de-imagenes)
-    * [Gestión de Contenedores](#gestion-de-contenedores)
-    * [Gestión de Volúmenes y Redes](#gestion-de-volumenes-y-redes)
-    * [Gestion de Composiciones](#gestion-de-composiciones)
+    * [Gestión de Imágenes](#gestión-de-imágenes)
+    * [Gestión de Contenedores](#gestión-de-contenedores)
+    * [Gestión de Volúmenes y Redes](#gestión-de-volúmenes-y-redes)
+    * [Gestion de Composiciones](#docker-compose)
 
 ## Antes de
 
@@ -76,7 +76,8 @@ docker version
 # ...
 ```
 
-> Recomendación: activa el autocompletado de comandos de Docker en tu shell. Esto te ahorra tiempo y errores al escribir. [Guía oficial aquí.](https://docs.docker.com/engine/cli/completion/)
+> [!TIP]
+> activa el autocompletado de comandos de Docker en tu shell. Esto te ahorra tiempo y errores al escribir. [Guía oficial aquí.](https://docs.docker.com/engine/cli/completion/)
 
 [subir al indice](#contenidos)
 
@@ -105,6 +106,7 @@ Un **contenedor**, en cambio, no emula hardware ni instala un sistema operativo 
 
 ![arquitectura de la contenedorizacion](./imgs/ArquitecturaContenerizador.png)
 
+> [!NOTE]
 > Desde dentro, un contenedor se "siente" como una máquina independiente, pero en realidad está compartiendo recursos del sistema anfitrión de forma segura y eficiente. Por eso, los contenedores son mucho más ligeros y rápidos que las máquinas virtuales.
 
 [subir al indice](#contenidos)
@@ -254,8 +256,8 @@ docker image ls
 # nombreImagen   17.5-alpine3.22   fbe21607052b   5 weeks ago   398MB
 ```
 
-> **Imagen Vs. Contenedor**
-> Una **imagen** es una definición de solo lectura que actúa como plantilla para crear contenedores. Un **contenedor**, en cambio, es una instancia activa basada en esa imagen, con su propio sistema de archivos de lectura-escritura, procesos y red. Es decir, la imagen es el plano; el contenedor, la ejecución real.
+> [!NOTE]
+> **Imagen Vs. Contenedor**: Una **imagen** es una definición de solo lectura que actúa como plantilla para crear contenedores. Un **contenedor**, en cambio, es una instancia activa basada en esa imagen, con su propio sistema de archivos de lectura-escritura, procesos y red. Es decir, la imagen es el plano; el contenedor, la ejecución real.
 
 [subir al indice](#contenidos)
 
@@ -680,8 +682,8 @@ networks:
 
 Una de las grandes ventajas de Docker Compose es que crea una red interna para todos los servicios definidos en el archivo. Dentro de esta red, los nombres de los servicios (ej. `frontend`, `backend`, `database`) actúan como nombres de host. Esto simplifica enormemente la comunicación entre contenedores, ya que no necesitas conocer sus direcciones IP internas. En el caso del ejemplo, el front se comunicaría con el back a través de la ruta `http://backend:3000`, suponiendo que 3000 es el puerto establecido internamente dentro de la aplicación de back... y el back se comunicaría con la base de datos a través del host `database` y si no se hizo cambio de puerto en Postgresql, el puerto sería 5432.
 
-> **Exponer solo el puerto del _frontend_**
-> En un entorno de producción, es una buena práctica de seguridad exponer al mundo exterior (el host) solo los servicios que realmente lo necesitan. En nuestro ejemplo, solo el `frontend` necesita ser accesible desde el navegador del usuario. El `backend` y la `database` solo necesitan comunicarse entre sí, por lo que sus puertos no se exponen al host. Esto reduce la superficie de ataque y mantiene los servicios internos protegidos.
+> [!TIP]
+> **Exponer solo el puerto del _frontend_**: En un entorno de producción, es una buena práctica de seguridad exponer al mundo exterior (el host) solo los servicios que realmente lo necesitan. En nuestro ejemplo, solo el `frontend` necesita ser accesible desde el navegador del usuario. El `backend` y la `database` solo necesitan comunicarse entre sí, por lo que sus puertos no se exponen al host. Esto reduce la superficie de ataque y mantiene los servicios internos protegidos.
 
 [subir al indice](#contenidos)
 
