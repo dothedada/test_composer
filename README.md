@@ -56,7 +56,8 @@ Para comenzar a usar Docker en tu máquina local, es importante comprender que h
 ### Paso a paso
 
 1. **Instala Docker Desktop** sigue las instrucciones según tu sistema operativo...
-   * [Docker en Linux (manual)](https://docs.docker.com/engine/install/)- [Docker para macOS](https://docs.docker.com/desktop/install/mac-install/)
+   * [Docker en Linux (manual)](https://docs.docker.com/engine/install/)
+   * [Docker para macOS](https://docs.docker.com/desktop/install/mac-install/)
    * [Docker para Windows (WSL2)](https://docs.docker.com/desktop/install/windows-install/)
 
 2. **Abre la aplicación Docker Desktop**  Asegúrate de que aparece un recuadro verde con el ícono de la ballena en la parte inferior izquierda. Eso indica que el servidor Docker está activo y funcionando correctamente.
