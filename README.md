@@ -6,19 +6,19 @@ La idea detrás de las herramientas de contenedorización es permitirnos empaque
 
 ![El nacimiento de Docker](./imgs/whyDocker.png)
 
-## contenidos {#contenidos}
+## contenidos
 
 1. [Antes de...](#antes-de)
     * [Instalación](#instalación)
     * [Paso a paso](#paso-a-paso)
 
 2. [Conceptos](#conceptos)
-    * [¿Para qué la contenedorización?](#para-que-la-contenedorizacion)
-    * [Intro: Máquinas, VM y Contenedores](#intro-maquinas-vm-y-contenedores)
-    * [¿Cómo funciona esto?](#como-funciona-esto)
-        * [AIUUURAAA (_--help_)](#aiuuuraaa)
-        * [Los planos (imágenes o _images_)](#images)
-        * [Cosas que no queremos contenedorizar (_dockerignore_)](#dockerignore)
+    * [¿Para qué la contenedorización?](#para-qué-la-contenedorizacion)
+    * [Intro: Máquinas, VM y Contenedores](#intro-máquinas-vm-y-contenedores)
+    * [¿Cómo funciona esto?](#cómo-funciona-esto)
+        * [AIUUURAAA (_--help_)](#aiuuuraaa-help)
+        * [Los planos (imágenes o _images_)](#los-planos-imágenes-o-images)
+        * [Cosas que no queremos contenedorizar (_dockerignore_)](#cosas-que-no-queremos-contenedorizar-dockerignore)
         * [La ejecución (los contenedores)](#containers)
         * [La memoria (los volúmenes o _volumes_)](#volumes)
         * [Rendimiento y publicación](#rendimiento-y-publicacion)
@@ -82,7 +82,7 @@ docker version
 
 ## Conceptos
 
-### ¿Para qué la contenedorización? {#para-que-la-contenedorizacion}
+### ¿Para qué la contenedorización?
 
 Al contenedorizar una aplicación, empaquetamos no solo su código, sino también todo lo que necesita para funcionar: librerías, configuraciones, binarios, etc. Todo eso va dentro del contenedor lo que nos proporciona varias ventajas:
 
@@ -93,7 +93,7 @@ Al contenedorizar una aplicación, empaquetamos no solo su código, sino tambié
 
 [subir al indice](#contenidos)
 
-### Intro: Máquinas, VM y contenedores {#intro-maquinas-vm-y-contenedores}
+### Intro: Máquinas, VM y contenedores
 
 Sin entrar mucho en detalles, partiremos de que un computador es, una **máquina**, con un procesador, una RAM y un disco duro, que son administrados por un sistema operativo, sobre el cual corren nuestras aplicaciones. Estas aplicaciones solicitan recursos de memoria y cómputo a la máquina por medio del sistema operativo para ejecutarse correctamente.
 
@@ -109,9 +109,9 @@ Un **contenedor**, en cambio, no emula hardware ni instala un sistema operativo 
 
 [subir al indice](#contenidos)
 
-### Cómo funciona esto {#como-funciona-esto}
+### Cómo funciona esto
 
-#### AIUUURAAA (_--help_) {#aiuuuraaa}
+#### AIUUURAAA (_--help_)
 
 Uno de los comandos más útiles en Docker (y en muchas herramientas de línea de comandos) es `--help`.
 
@@ -151,7 +151,7 @@ docker volume rm --help
 
 [subir al indice](#contenidos)
 
-#### Los planos (imágenes o _images_) {#images}
+#### Los planos (imágenes o _images_)
 
 Uno de los fuertes de la contenedorización es la replicabilidad y la escalabilidad, es por esto que necesitamos unos planos consistentes que permitan generar cuantos contenedores necesitemos con exactamente la misma información. Acá es donde entran las _imágenes (images)_.
 
@@ -259,7 +259,7 @@ docker image ls
 
 [subir al indice](#contenidos)
 
-##### Cosas que no queremos contenedorizar (_dockerignore_) {#dockerignore}
+##### Cosas que no queremos contenedorizar (_dockerignore_)
 
 Cuando Docker construye una imagen, al usar el comando `build`, se copian todos todos los archivos del directorio especificado en la instrucción `copy` para crear el build context. Pero no siempre queremos que todo se incluya. Así como `.gitignore` le dice a Git qué archivos no debe rastrear, el archivo `.dockerignore` le indica a Docker qué archivos debe excluir al construir una imagen. este archivo nos ayuda especificar qué debe excluirse del contexto de construcción. Con esto evitamo subir archivos pesados o irrelevantes (como node_modules o dist/), aceleramos el proceso de build y protegemos archivos sensibles como .env o claves.
 
@@ -275,7 +275,7 @@ dist
 
 [subir al indice](#contenidos)
 
-#### La ejecución (los contenedores) {#containers}
+#### La ejecución (los contenedores)
 
 Sólo por recordar: Un **contenedor** es una instancia en ejecución de una imagen, que proporciona un entorno aislado y ligero para ejecutar una aplicación junto con todas sus dependencias. Aunque comparte el kernel del sistema operativo del host, cada contenedor tiene su propio sistema de archivos, red y procesos, lo que permite que se comporte como si fuera una máquina independiente. Esta separación asegura que las aplicaciones se ejecuten de forma consistente.
 
@@ -350,7 +350,7 @@ docker ps -a
 
 [subir al indice](#contenidos)
 
-#### La memoria (los volúmenes o _volumes_) {#volumes}
+#### La memoria (los volúmenes o _volumes_)
 
 Por defecto, todo lo que ocurre dentro de un contenedor (archivos creados, bases de datos generadas, configuraciones guardadas) **se pierde al detenerlo o eliminarlo**, ya que los contenedores son efímeros y no están diseñados para conservar el estado de lo que contienen.
 
@@ -480,7 +480,7 @@ docker volume prune
 
 [subir al indice](#contenidos)
 
-#### Rendimiento y publicación {#rendimiento-y-publicacion}
+#### Rendimiento y publicación
 
 Por defecto, los contenedores usan todos los recursos disponibles del host. Sin embargo, Docker permite limitar el consumo de CPU y memoria, lo cual es muy útil en entornos de producción o cuando ejecutas múltiples contenedores en la misma máquina.
 
@@ -520,7 +520,7 @@ Una vez publicada, puedes compartir esa imagen o usarla desde cualquier parte co
 
 [subir al indice](#contenidos)
 
-### Dentro del contenedor (Terminal(ception) o _exec_) {#exec}
+### Dentro del contenedor (Terminal(ception) o _exec_)
 
 A veces, mientras trabajamos con una aplicación en contenedores, necesitamos _entrar_ en uno de ellos para revisar qué está pasando por dentro: mirar archivos, ejecutar un comando, explorar una carpeta o correr una migración manual. Es como hacer una especie de _inception_ del terminal: estás en tu terminal, pero saltas dentro del terminal del contenedor, sin detenerlo ni modificarlo desde fuera.
 
@@ -550,7 +550,7 @@ docker exec mi-contenedor node scripts/init-db.js
 
 [subir al indice](#contenidos)
 
-### Por fuera del contenedor (Redes o _networks_) {#network}
+### Por fuera del contenedor (Redes o _networks_)
 
 Los contenedores no están solos: aunque se ejecuten de forma aislada, muchas veces necesitan comunicarse entre sí o con el mundo exterior. Acá es donde entran las redes de Docker. Así como usamos volúmenes para mantener datos persistentes por fuera del contenedor, **usamos redes para conectarlos de forma controlada y predecible**.
 
@@ -591,7 +591,7 @@ docker network inspect mi-red
 
 [subir al indice](#contenidos)
 
-## Composición y Orquestación con Docker Compose {#compose}
+## Composición y Orquestación con Docker Compose
 
 Hasta ahora hemos visto cómo gestionar un solo contenedor a la vez, lo cual funciona bien para aplicaciones sencillas. Pero ¿qué pasa cuando la aplicación se vuelve más compleja y necesita varios servicios, como una base de datos, un _backend_ y un _frontend_? Gestionar cada contenedor por separado, con sus comandos `docker run` largos y llenos de banderas (`-d`, `-p`, `--name`, `--network`, `-v`), se vuelve una tarea tediosa y propensa a errores.
 
@@ -599,7 +599,7 @@ Aquí es donde entra en juego la **composición** de contenedores, una forma de 
 
 [subir al indice](#contenidos)
 
-### El archivo `docker-compose.yml` {#docker-compose}
+### El archivo `docker-compose.yml`
 
 El corazón de Docker Compose es un archivo en formato YAML que describe los servicios, redes y volúmenes de tu aplicación. Es declarativo, lo que significa que describes el estado final que deseas, y Compose se encarga de lograrlo.
 
@@ -676,7 +676,7 @@ networks:
 
 [subir al indice](#contenidos)
 
-#### La importancia de los nombres en la composición {#compose-paths}
+#### La importancia de los nombres en la composición
 
 Una de las grandes ventajas de Docker Compose es que crea una red interna para todos los servicios definidos en el archivo. Dentro de esta red, los nombres de los servicios (ej. `frontend`, `backend`, `database`) actúan como nombres de host. Esto simplifica enormemente la comunicación entre contenedores, ya que no necesitas conocer sus direcciones IP internas. En el caso del ejemplo, el front se comunicaría con el back a través de la ruta `http://backend:3000`, suponiendo que 3000 es el puerto establecido internamente dentro de la aplicación de back... y el back se comunicaría con la base de datos a través del host `database` y si no se hizo cambio de puerto en Postgresql, el puerto sería 5432.
 
@@ -722,7 +722,7 @@ docker compose exec backend npm test
 
 [subir al indice](#contenidos)
 
-## Recomendaciones {#recomendaciones}
+## Recomendaciones
 
 * **Usa imágenes ligeras**: Opta por imágenes como `alpine` (por ejemplo, `node:18-alpine` o `python:3.9-alpine`) en tus `Dockerfile`. Son mucho más pequeñas, lo que reduce los tiempos de descarga y el uso de recursos.
 * **Mantén tus imágenes limpias**: Usa el comando `docker system prune` para limpiar imágenes, contenedores, volúmenes y redes no utilizados. Esto libera espacio en el disco duro de forma segura.
@@ -733,11 +733,11 @@ docker compose exec backend npm test
 
 [subir al indice](#contenidos)
 
-## Resumen de Comandos {#resumen-de-comandos}
+## Resumen de Comandos
 
 Para facilitar la consulta, aquí tienes una lista consolidada de los comandos más importantes que hemos visto a lo largo de esta guía:
 
-### Gestión de Imágenes {#gestion-de-imagenes}
+### Gestión de Imágenes
 
 * `docker images` o `docker image ls`: Muestra las imágenes disponibles.
 * `docker pull [imagen]`: Descarga una imagen desde un registro.
@@ -746,7 +746,7 @@ Para facilitar la consulta, aquí tienes una lista consolidada de los comandos m
 * `docker push [imagen]`: Publica una imagen en un registro.
 * `docker rmi [imagen]`: Borra una imagen.
 
-### Gestión de Contenedores {#gestion-de-contenedores}
+### Gestión de Contenedores
 
 * `docker run [imagen]`: Crea y ejecuta un contenedor.
 * `docker run -d [imagen]`: Ejecuta el contenedor en segundo plano (`detached`).
@@ -760,7 +760,7 @@ Para facilitar la consulta, aquí tienes una lista consolidada de los comandos m
 * `docker rm [id/nombre]`: Borra un contenedor (si no está en ejecución).
 * `docker exec -it [id/nombre] /bin/sh`: Entra en una terminal dentro del contenedor.
 
-### Gestión de Volúmenes y Redes {#gestion-de-volumenes-y-redes}
+### Gestión de Volúmenes y Redes
 
 * `docker volume ls`: Lista los volúmenes.
 * `docker volume create [nombre]`: Crea un volumen con nombre.
@@ -770,7 +770,7 @@ Para facilitar la consulta, aquí tienes una lista consolidada de los comandos m
 * `docker network create [nombre]`: Crea una red personalizada.
 * `docker run --network [nombre-red] [imagen]`: Conecta un contenedor a una red.
 
-### Docker Compose {#gestion-de-composiciones}
+### Docker Compose
 
 * `docker compose up -d`: Inicia el stack de servicios en segundo plano.
 * `docker compose down`: Detiene y elimina los servicios.
