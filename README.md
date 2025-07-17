@@ -9,7 +9,7 @@ La idea detrás de las herramientas de contenedorización es permitirnos empaque
 ## contenidos {#contenidos}
 
 1. [Antes de...](#antes-de)
-    * [Instalación](#instalacion)
+    * [Instalación](#instalación)
     * [Paso a paso](#paso-a-paso)
 
 2. [Conceptos](#conceptos)
