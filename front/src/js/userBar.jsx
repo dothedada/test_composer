@@ -2,25 +2,29 @@ import { useEffect, useRef, useState } from "react";
 import { fetcher } from "./fetcher";
 
 export function UserBar() {
-  const [logged, setLogged] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const userData = localStorage.getItem("journal");
+    if (!userData) {
+      return;
+    }
 
-    console.log(userData);
-    (async () => {
-      const data = await fetcher({
-        url: `http://localhost:8080/api/logged`,
-        method: "POST",
-        body: { username: userData },
-      });
-
-      console.log(data);
-    })();
+    fetcher({
+      url: `http://localhost:8080/api/logged`,
+      method: "POST",
+      body: { username: userData },
+    })
+      .then((response) => {
+        setUser(response);
+      })
+      .catch(() => setLogged(false));
   }, []);
+
   return (
     <>
       <LoginForm />
+      {user}
       <button type="button">Crear usuario</button>
     </>
   );

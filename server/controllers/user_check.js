@@ -1,14 +1,13 @@
 import jwt from "jsonwebtoken";
-import { checkUsername, userExists } from "../services/userService";
+import { checkUsername } from "../services/userService.js";
 
-export async function setUser(req, res, next) {
+export async function checkUser(req, res, next) {
   const { username: hashedUsername } = req.body;
   if (!hashedUsername) {
     return next();
   }
 
-  const username = jwt.decode(req.body.username);
-
+  const { username } = jwt.decode(req.body.username);
   if (await checkUsername(username)) {
     res.username = username;
   }

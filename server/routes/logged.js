@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { setUser } from "../controllers/user_set.js";
+import { checkUser } from "../controllers/user_check.js";
 
 const loggedRoute = Router();
 
-loggedRoute.post("/", setUser, (req, res) => {
-  console.log("\n\n\nCARAJO\n\n\n");
+loggedRoute.post("/", checkUser, (req, res) => {
   console.log(res.username);
+  res.json(res.username);
 });
 
 export { loggedRoute };
+//     console.log("carajo:", data);
