@@ -43,7 +43,7 @@ Los conceptos, marcos y flujos de trabajo que explicamos aquí son comunes a la 
 
 [subir al indice](#contenidos)
 
-### Instalación {#instalacion}
+### Instalación
 
 Para comenzar a usar Docker en tu máquina local, es importante comprender que hay varias piezas que trabajan juntas:
 
@@ -53,7 +53,7 @@ Para comenzar a usar Docker en tu máquina local, es importante comprender que h
 
 [subir al indice](#contenidos)
 
-### Paso a paso {#paso-a-paso}
+### Paso a paso
 
 1. **Instala Docker Desktop** sigue las instrucciones según tu sistema operativo...
    * [Docker en Linux (manual)](https://docs.docker.com/engine/install/)- [Docker para macOS](https://docs.docker.com/desktop/install/mac-install/)
@@ -80,7 +80,7 @@ docker version
 
 [subir al indice](#contenidos)
 
-## Conceptos {#conceptos}
+## Conceptos
 
 ### ¿Para qué la contenedorización? {#para-que-la-contenedorizacion}
 
