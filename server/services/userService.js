@@ -64,7 +64,7 @@ export async function createUserProfile(userData) {
       throw new Error("Failed to create user profile");
     }
 
-    return null;
+    return rows[0].username;
   } catch (err) {
     throw new Error(`cannot create user profile: ${err}`);
   }

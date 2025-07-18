@@ -4,11 +4,11 @@ import { setUser } from "../controllers/user_set.js";
 const signUpRoute = Router();
 
 signUpRoute.post("/", setUser, (req, res) => {
-  if (res.success) {
-    res.send(`creado: ${res.successMessage}`);
-  } else {
-    res.send(`no creado: ${res.successMessage}`);
-  }
+  res.json({
+    success: res.success,
+    message: res.message,
+    username: res.username,
+  });
 });
 
 export { signUpRoute };
