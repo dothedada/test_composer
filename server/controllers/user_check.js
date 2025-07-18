@@ -16,7 +16,9 @@ export async function checkUser(req, res, next) {
 
 export async function bouncer(req, res, next) {
   if (!res.username) {
-    return next(Error("You are not logged in"));
+    return res
+      .status(403)
+      .json({ success: false, data: "User is not logged in" });
   }
   next();
 }

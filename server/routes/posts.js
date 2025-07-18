@@ -4,16 +4,11 @@ import {
   getUserPosts,
   makeUserPost,
 } from "../services/postService.js";
+import { bouncer } from "../controllers/user_check.js";
 
 const postsRoute = Router();
 
-postsRoute.post("/getposts", async (req, res) => {
-  if (!res.username) {
-    return res
-      .status(403)
-      .json({ success: false, data: "User is not logged in" });
-  }
-
+postsRoute.post("/getposts", bouncer, async (req, res) => {
   try {
     const data = await getUserPosts(res.username);
     return res.json({ success: true, data: data });
@@ -25,11 +20,7 @@ postsRoute.post("/getposts", async (req, res) => {
   }
 });
 
-postsRoute.post("/canpublish", async (req, res) => {
-  if (!res.username) {
-    return res.json({ success: false, data: "User not logged in" });
-  }
-
+postsRoute.post("/canpublish", bouncer, async (req, res) => {
   try {
     const canPublish = await canPublishToday(res.username);
     return res.json({ success: true, canPublish });
@@ -41,11 +32,7 @@ postsRoute.post("/canpublish", async (req, res) => {
   }
 });
 
-postsRoute.post("/pusblishpost", async (req, res) => {
-  if (!res.username) {
-    return res.json({ success: false, data: "User not logged in" });
-  }
-
+postsRoute.post("/pusblishpost", bouncer, async (req, res) => {
   const { post } = req.body;
   if (!post) {
     return res.json({ success: false, data: "No text to post" });
