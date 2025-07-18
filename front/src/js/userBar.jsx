@@ -11,7 +11,7 @@ export function UserBar({ user, setUser }) {
     }
 
     fetcher({
-      url: `http://localhost:8080/api/logged`,
+      path: "/logged",
       method: "POST",
       body: { username: userData },
     })
@@ -65,7 +65,7 @@ function LoginForm({ updateLoginCallback }) {
     event.preventDefault();
 
     const data = await fetcher({
-      url: `http://localhost:8080/api/login`,
+      path: `/login`,
       method: "POST",
       body: { email: email.current.value, password: password.current.value },
     });
@@ -99,7 +99,7 @@ function SignInForm({ updateLoginCallback }) {
     event.preventDefault();
 
     const data = await fetcher({
-      url: `http://localhost:8080/api/sign-up`,
+      path: `/sign-up`,
       method: "POST",
       body: {
         username: username.current.value,

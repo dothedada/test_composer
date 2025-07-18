@@ -10,7 +10,7 @@ export function UserPublications() {
 
     (async () => {
       const posts = await fetcher({
-        url: `http://localhost:8080/api/posts/get`,
+        path: `/posts/get`,
         method: "POST",
         body: { username: userData },
       });
@@ -23,7 +23,15 @@ export function UserPublications() {
       if (entries.length === 7) {
         const todayPost = entries.shift();
         setLastPost(todayPost);
+      } else if (entries > 0) {
+        const lastPostDate = entries[0].post_date.toLocaleString().slice(0, 10);
+        const today = new Date().toISOString().slice(0, 10);
+        if (lastPostDate === today) {
+          const todayPost = entries.shift();
+          setLastPost(todayPost);
+        }
       }
+
       setPreviousPosts(entries);
     })();
   }, []);
@@ -60,7 +68,7 @@ export function PostForm({ updatePostCallbak }) {
     const userData = localStorage.getItem("journal");
 
     const response = await fetcher({
-      url: `http://localhost:8080/api/posts/publish`,
+      path: `/posts/publish`,
       method: "POST",
       body: { username: userData, post: textRef.current.value },
     });
@@ -92,7 +100,7 @@ function SinglePost({ post_date: date, post_text: text, post_color: color }) {
 
   const formattedDate = date.toLocaleString().slice(0, 10);
   return (
-    <div className="post" style={{ '--post-color': color }}>
+    <div className="post" style={{ "--post-color": color }}>
       <div className="date">{formattedDate}</div>
       <div className="text">{text}</div>
     </div>

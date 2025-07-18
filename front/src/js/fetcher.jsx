@@ -1,5 +1,5 @@
 export async function fetcher({
-  url,
+  path,
   method = "GET",
   headers = {},
   body = null,
@@ -7,16 +7,20 @@ export async function fetcher({
   const controller = new AbortController();
 
   try {
-    const response = await fetch(url, {
-      method: method,
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        ...headers,
+    console.log(">>>", import.meta.env.BACK_PATH);
+    const response = await fetch(
+      `${import.meta.env.VITE_BACK_PATH}:${import.meta.env.VITE_BACK_PORT}/api${path}`,
+      {
+        method: method,
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          ...headers,
+        },
+        body: body ? JSON.stringify(body) : null,
+        signal: controller.signal,
       },
-      body: body ? JSON.stringify(body) : null,
-      signal: controller.signal,
-    });
+    );
 
     if (!response.ok) {
       throw new Error(

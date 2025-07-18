@@ -1,65 +1,84 @@
 services:
   db_log:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
     image: postgres:17.5-alpine3.22
     container_name: auth_db
     restart: no
     environment:
-      POSTGRES_DB: auth_db
-      POSTGRES_USER: mmejia
-      POSTGRES_PASSWORD: ed25f127e2e551e0
-    ports:
-      - "5432:5432"
+      POSTGRES_DB: ${LOG_DB_NAME}
+      POSTGRES_USER: ${LOG_DB_USER}
+      POSTGRES_PASSWORD: ${LOG_DB_PASS}
     volumes:
       - db_log_data:/var/lib/postgresql/data
       - ./db/db_log_init:/docker-entrypoint-initdb.d
-    # networks:
-    #   - journal
+    networks:
+      - journal
 
   db_posts:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
     image: postgres:17.5-alpine3.22
     container_name: posts_db
     restart: no
     environment:
-      POSTGRES_DB: posts_db
-      POSTGRES_USER: mmejia
-      POSTGRES_PASSWORD: ed25f127e2e551e0
-    ports:
-      - "5433:5432"
+      POSTGRES_DB: ${POST_DB_NAME}
+      POSTGRES_USER: ${POST_DB_USER}
+      POSTGRES_PASSWORD: ${POST_DB_PASS}
     volumes:
       - db_post_data:/var/lib/postgresql/data
       - ./db/db_post_init:/docker-entrypoint-initdb.d
-    # networks:
-    #   - journal
+    networks:
+      - journal
 
-  # backend:
-  #   build:
-  #     context: ./server
-  #     dockerfile: Dockerfile
-  #   image: journal_server_image
-  #   container_name: journal_server
-  #   restart: no
-  #   ports:
-  #     - "8080:8080"
-  #   depends_on:
-  #     - db_log
-  #     - db_posts
-  #   networks:
-  #     - journal
-  #   environment:
-  #     LOG_HOST: db_log
-  #     LOG_USER: mmejia
-  #     LOG_PASS: ed25f127e2e551e0
-  #     LOG_PORT: 5432
-  #     LOG_DB: auth_db
-  #     POST_HOST: db_posts
-  #     POST_USER: mmejia
-  #     POST_PASS: ed25f127e2e551e0
-  #     POST_PORT: 5432
-  #     POST_DB: posts_db
-  #     PORT: 8080
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: journal_server_image
+    container_name: journal_server
+    restart: no
+    ports:
+      - "3000:8080"
+    depends_on:
+      - db_log
+      - db_posts
+    networks:
+      - journal
+    environment:
+      LOG_HOST: db_log
+      LOG_USER: ${LOG_DB_USER}
+      LOG_PASS: ${LOG_DB_PASS}
+      LOG_PORT: 5432
+      LOG_DB: ${LOG_DB_NAME}
+      POST_HOST: db_posts
+      POST_USER: ${POST_DB_USER}
+      POST_PASS: ${POST_DB_PASS}
+      POST_PORT: 5432
+      POST_DB: ${POST_DB_NAME}
+      PORT: 8080
 
-# networks:
-#   journal:
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+      args:
+        VITE_BACK_PATH: http://localhost
+        VITE_BACK_PORT: 3000
+    image: journal_front_image
+    container_name: journal_front
+    restart: no
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - journal
+
+networks:
+  journal:
 
 volumes:
   db_post_data:
