@@ -136,7 +136,7 @@ docker run --help
 # junto a una breve descripción de lo que hace cada una.
 ```
 
-Lo mejor de este comando, es que funciona en cada nivel de especificidad de la instrucción sobre la cual necesitamos información.
+Lo mejor de este comando, es que funciona sobre cada nivel de especificidad en la instrucción de la cual necesitamos información.
 
 ```bash
 docker --help
@@ -163,15 +163,15 @@ Una **imagen** es un archivo inmutable (de sólo lectura / readonly) que contien
 Es posible trabajar trabajar con imágenes creadas y optimizadas por otros...
 
 ```bash
-#             comando para importar un contenedor
-#             |
-docker        pull     docker/getting-started
-# |           |        |
-# Aplicacion  comando  ruta a la ubicación de la imagen
+#      comando para importar un contenedor
+#      |
+docker pull docker/getting-started
+#           |
+#           ruta a la ubicación de la imagen
 
 # anatomía de la ubicación de las imágenes:
-
 # docker pull [REGISTRO/][USUARIO/]REPO[:TAG]
+
 docker pull ubuntu
 # usa Docker Hub por defecto, imagen oficial `ubuntu`, última versión
 
@@ -188,16 +188,15 @@ docker pull ghcr.io/owner/repo:tag
     
 docker pull registry.example.com/proyecto/app:latest
 # imagen desde un registro privado
-
 ```
 
 o crear nuestras propias imágenes, estas se construyen usualmente a partir de un archivo llamado `Dockerfile` (Primera en mayúscula y sin extensión) en la raíz de nuestro proyecto, que define paso a paso cómo se arma esa imagen: desde qué base parte, qué dependencias instala, qué archivos copia y qué comando ejecuta por defecto.
 
 ```dockerfile
-# 1. Para no reinventar la rueda, partimos de la imagen base
-# oficial en docker hub, es mejor partir de la imágenes 
-# oficiales, pues ya están optimizadas tanto por estructura como por 
-# rendimiento, en este caso usamos la de node y con el tag :24-alpine3.21
+# 1. No es necesario reinventar siempre la rueda, partimos de la imagen base
+# oficial en docker hub. Es mejor partir de la imágenes oficiales, 
+# pues ya están optimizadas tanto por estructura como por rendimiento,
+# en este ejemplo usamos la de node y con el tag :24-alpine3.21
 FROM node:24-alpine3.21
 
 # 1.1 Asignamos las variables de entorno
@@ -226,9 +225,9 @@ CMD ["npm", "start"]
 
 ```
 
-![Las capas constitutivas de una imagen](./imgs/CapasImagen.png)
-
 El orden de los comandos en un `Dockerfile` es clave porque Docker construye la imagen paso a paso y guarda una **capa intermedia en caché** después de cada instrucción. Si un paso no ha cambiado desde la última vez, Docker reutiliza la capa en lugar de rehacerla, lo que acelera la construcción. Por eso en nuestro ejemplo (y como buena práctica) colocamos primero los pasos menos propensos a cambiar, como `COPY package*.json ./` y `RUN npm install`, antes de copiar el resto del código. Así, si solo cambias los archivos fuente pero no las dependencias, Docker podrá aprovechar el cache y evitar reinstalar todo, haciendo el proceso mucho más eficiente.
+
+![Las capas constitutivas de una imagen](./imgs/CapasImagen.png)
 
 una vez tenemos nuestro `Dockerfile`, podemos crear la imagen para nuestro contenedor desde el directorio donde se encuentra el archivo.
 
@@ -251,6 +250,7 @@ Las imágenes creadas con Docker se almacenan localmente en el sistema de archiv
 docker images
 # es lo mismo que
 docker image ls
+# pero docker image es el comando para acceder al scope de image
 
 # que retorna:
 # REPOSITORY     TAG               IMAGE ID       CREATED       SIZE
@@ -489,7 +489,7 @@ Por defecto, los contenedores usan todos los recursos disponibles del host. Sin 
 
 ```bash
 # Monitorear uso de recursos de docker
-Docker stats
+docker stats
 
 # Muestra el estado de todos los procesos que 
 # corren dentro del contenedor

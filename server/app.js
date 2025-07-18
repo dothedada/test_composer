@@ -10,6 +10,7 @@ import { loginRoute } from "./routes/login.js";
 import { signUpRoute } from "./routes/signUp.js";
 import { configurePassport } from "./config/passport.js";
 import { loggedRoute } from "./routes/logged.js";
+import { postsRoute } from "./routes/posts.js";
 
 dotenv.config();
 
@@ -40,16 +41,11 @@ app.use(passport.initialize());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static("/public"));
-app.use("/api/logged", loggedRoute);
 app.use("/api/login", loginRoute);
 app.use("/api/sign-up", signUpRoute);
-app.use("/", (req, res) => {
-  if (req.isUnauthenticated()) {
-    res.redirect("/login");
-    return;
-  }
-  res.send(req.user);
-});
+app.use("/api/logged", loggedRoute);
+app.use();
+app.use("/api/posts", postsRoute);
 
 app.listen(PORT, () => {
   console.log("Listening in port", PORT);

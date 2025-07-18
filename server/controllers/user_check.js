@@ -13,3 +13,10 @@ export async function checkUser(req, res, next) {
   }
   next();
 }
+
+export async function bouncer(req, res, next) {
+  if (!res.username) {
+    return next(Error("You are not logged in"));
+  }
+  next();
+}
