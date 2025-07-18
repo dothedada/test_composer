@@ -28,8 +28,6 @@ export function UserPublications() {
     })();
   }, []);
 
-  console.log(lastPost);
-
   return (
     <>
       {lastPost ? (
@@ -99,4 +97,8 @@ function SinglePost({ post_date: date, post_text: text, post_color: color }) {
       <div className="text">{text}</div>
     </div>
   );
+}
+
+export function NotLogged() {
+  return <div>Necesitas logearte para ver tus últimas publicaciones</div>;
 }

@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { fetcher } from "./fetcher";
 
-export function UserBar() {
-  const [user, setUser] = useState(null);
+export function UserBar({ user, setUser }) {
   const [activeForm, setActiveForm] = useState(1);
 
   useEffect(() => {
@@ -21,7 +20,7 @@ export function UserBar() {
         setUser(username);
       })
       .catch(() => setUser(null));
-  }, []);
+  }, [setUser]);
 
   const handleCloseSession = () => {
     localStorage.removeItem("journal");
