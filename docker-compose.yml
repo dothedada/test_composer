@@ -1,22 +1,35 @@
+# services: define todos los contenedores que forman la aplicación.
 services:
+  # --- Servicio 1: Base de Datos de Autenticación (Logs y Usuarios) ---
   db_log:
+    # build: especifica cómo construir la imagen para este servicio.
     build:
-      context: ./db
-      dockerfile: Dockerfile
+      context: ./db # context: el directorio que contiene el Dockerfile y los archivos necesarios.
+      dockerfile: Dockerfile # dockerfile: el nombre del Dockerfile a usar.
+    # image: la imagen base que se usará. En este caso, una versión ligera de Postgres.
     image: postgres:17.5-alpine3.22
+    # container_name: un nombre fácil de recordar para este contenedor.
     container_name: auth_db
+    # restart: política de reinicio. 'no' significa que no se reiniciará automáticamente si se detiene.
     restart: no
+    # environment: define las variables de entorno dentro del contenedor.
     environment:
-      POSTGRES_DB: ${LOG_DB_NAME}
-      POSTGRES_USER: ${LOG_DB_USER}
-      POSTGRES_PASSWORD: ${LOG_DB_PASS}
+      POSTGRES_DB: ${LOG_DB_NAME}       # Nombre de la base de datos, cargado desde un archivo .env
+      POSTGRES_USER: ${LOG_DB_USER}     # Usuario de la base de datos, cargado desde un archivo .env
+      POSTGRES_PASSWORD: ${LOG_DB_PASS} # Contraseña del usuario, cargada desde un archivo .env
+    # volumes: mapea directorios o archivos entre la máquina host y el contenedor.
     volumes:
+      # Volumen nombrado 'db_log_data' para persistir los datos de la base de datos.
       - db_log_data:/var/lib/postgresql/data
+      # Monta el script de inicialización. Se ejecutará la primera vez que el contenedor se cree.
       - ./db/db_log_init:/docker-entrypoint-initdb.d
+    # networks: conecta el contenedor a una red específica.
     networks:
       - journal
 
+  # --- Servicio 2: Base de Datos de Publicaciones (Posts) ---
   db_posts:
+    # La configuración es idéntica a 'db_log', pero para la base de datos de posts.
     build:
       context: ./db
       dockerfile: Dockerfile
@@ -33,54 +46,70 @@ services:
     networks:
       - journal
 
+  # --- Servicio 3: Backend (API del Servidor) ---
   backend:
     build:
-      context: ./server
+      context: ./server # Directorio que contiene el código fuente del servidor Node.js.
       dockerfile: Dockerfile
-    image: journal_server_image
+    image: journal_server_image # Nombre para la imagen que se construirá.
     container_name: journal_server
     restart: no
+    # ports: mapea puertos entre el host y el contenedor. "HOST:CONTENEDOR"
     ports:
+      # Expone el puerto 8080 del contenedor al puerto 3000 de la máquina host.
+      # Permite acceder a la API desde el navegador en http://localhost:3000
       - "3000:8080"
+    # depends_on: asegura que los servicios listados se inicien antes que este.
     depends_on:
       - db_log
       - db_posts
     networks:
       - journal
+    # Variables de entorno para la aplicación Node.js.
     environment:
-      LOG_HOST: db_log
+      LOG_HOST: db_log                  # El host de la BD es el nombre del servicio 'db_log'.
       LOG_USER: ${LOG_DB_USER}
       LOG_PASS: ${LOG_DB_PASS}
-      LOG_PORT: 5432
+      LOG_PORT: 5432                    # Puerto por defecto de Postgres.
       LOG_DB: ${LOG_DB_NAME}
-      POST_HOST: db_posts
+      POST_HOST: db_posts               # El host de la BD es el nombre del servicio 'db_posts'.
       POST_USER: ${POST_DB_USER}
       POST_PASS: ${POST_DB_PASS}
       POST_PORT: 5432
       POST_DB: ${POST_DB_NAME}
-      PORT: 8080
+      PORT: 8080                        # Puerto en el que la app Node.js escuchará dentro del contenedor.
 
+  # --- Servicio 4: Frontend (Aplicación Cliente) ---
   frontend:
     build:
-      context: ./front
+      context: ./front # Directorio que contiene el código fuente del frontend (React/Vite).
       dockerfile: Dockerfile
+      # args: argumentos disponibles solo durante el proceso de construcción de la imagen.
       args:
+        # Pasa la URL del backend al Dockerfile del frontend para que Vite la incluya en el build.
         VITE_BACK_PATH: http://localhost
         VITE_BACK_PORT: 3000
     image: journal_front_image
     container_name: journal_front
     restart: no
     ports:
+      # Expone el puerto 80 del contenedor (Nginx) al puerto 5173 del host.
+      # Permite acceder a la web en http://localhost:5173
       - "5173:80"
     depends_on:
-      - backend
+      - backend # El frontend no se iniciará hasta que el backend esté listo.
     networks:
       - journal
 
+# --- Definición de Redes ---
 networks:
+  # Define una red personalizada llamada 'journal'.
+  # Permite que los contenedores se comuniquen entre sí usando sus nombres de servicio como si fueran DNS.
   journal:
 
+# --- Definición de Volúmenes ---
 volumes:
+  # Declara los volúmenes nombrados para que Docker los gestione.
+  # Esto asegura que los datos persistan incluso si los contenedores son eliminados y recreados.
   db_post_data:
   db_log_data:
-
