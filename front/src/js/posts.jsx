@@ -92,7 +92,7 @@ function SinglePost({ post_date: date, post_text: text, post_color: color }) {
 
   const formattedDate = date.toLocaleString().slice(0, 10);
   return (
-    <div className="post" data-color={color}>
+    <div className="post" style={{ '--post-color': color }}>
       <div className="date">{formattedDate}</div>
       <div className="text">{text}</div>
     </div>
