@@ -9,6 +9,7 @@ export async function checkUsername(username) {
     return rows.length > 0;
   } catch (err) {
     console.error("Cannot check user", err);
+    return false;
   }
 }
 

@@ -12,8 +12,8 @@ services:
     volumes:
       - db_log_data:/var/lib/postgresql/data
       - ./db/db_log_init:/docker-entrypoint-initdb.d
-    networks:
-      - journal
+    # networks:
+    #   - journal
 
   db_posts:
     image: postgres:17.5-alpine3.22
@@ -28,23 +28,40 @@ services:
     volumes:
       - db_post_data:/var/lib/postgresql/data
       - ./db/db_post_init:/docker-entrypoint-initdb.d
-    networks:
-      - journal
+    # networks:
+    #   - journal
 
   # backend:
   #   build:
   #     context: ./server
-  #     dockerfile: DOckerfile
-  #   ports:
-  #
-  #
-  #   image: node:24-alpine3.21
+  #     dockerfile: Dockerfile
+  #   image: journal_server_image
   #   container_name: journal_server
   #   restart: no
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     - db_log
+  #     - db_posts
+  #   networks:
+  #     - journal
+  #   environment:
+  #     LOG_HOST: db_log
+  #     LOG_USER: mmejia
+  #     LOG_PASS: ed25f127e2e551e0
+  #     LOG_PORT: 5432
+  #     LOG_DB: auth_db
+  #     POST_HOST: db_posts
+  #     POST_USER: mmejia
+  #     POST_PASS: ed25f127e2e551e0
+  #     POST_PORT: 5432
+  #     POST_DB: posts_db
+  #     PORT: 8080
 
-networks:
-  journal:
+# networks:
+#   journal:
 
 volumes:
   db_post_data:
   db_log_data:
+

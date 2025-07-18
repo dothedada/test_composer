@@ -6,7 +6,6 @@ import { UserBar } from "./userBar.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <UserBar />
     <App />
   </StrictMode>,
 );
