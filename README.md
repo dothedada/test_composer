@@ -41,6 +41,8 @@ La idea detrás de las herramientas de contenedorización es permitirnos empaque
 
 Los conceptos, marcos y flujos de trabajo que explicamos aquí son comunes a la contenedorización y pueden aplicarse con herramientas como [**Podman**](https://podman.io/) (compatible con Docker CLI, sin daemon y con enfoque en seguridad), [**containerd**](https://containerd.io/) (runtime de contenedores usado internamente por Docker) o [**CRI-O**](https://cri-o.io/) (una alternativa ligera pensada para Kubernetes). Sin embargo, como [**Docker**](https://www.docker.com/) es en este momento la herramienta más utilizada para este propósito, todos los ejemplos y fragmentos de código en esta guía estarán basados en ella.
 
+Dentro de este repositorio también puedes encontrar una aplicación simple compuesta por dos bases de datos, un servidor y un front orquestadas en docker, el archivo docker-compose.yml y los Dockerfile estan comentados explicando lo que sucede o el porqué de cada línea
+
 [subir al indice](#contenidos)
 
 ### Instalación
