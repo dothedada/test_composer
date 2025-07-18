@@ -83,8 +83,7 @@ export async function canPublishToday(username) {
 	FROM user_posts
 	WHERE user_username = $1
 	ORDER BY post_date DESC
-	LIMIT 1
-	`;
+	LIMIT 1`;
 
   try {
     const { rows } = await postPool.query(query, [username]);
