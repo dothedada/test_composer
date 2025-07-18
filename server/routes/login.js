@@ -12,8 +12,6 @@ loginRoute.post("/", (req, res, next) => {
         .json({ message: info ? info.message : "Login fallido", user: user });
     }
 
-    console.log("carajo");
-
     req.login(user, { session: false }, (err) => {
       if (err) {
         res.send(err);
@@ -22,10 +20,10 @@ loginRoute.post("/", (req, res, next) => {
       const token = jwt.sign(
         { id: user.id, username: user.username },
         process.env.JWT_SECTRET || "Lucy fer nanda",
-        { expiresIn: "1h" },
+        { expiresIn: "2d" },
       );
 
-      return res.json({ token: token });
+      return res.json({ username: user.username, token: token });
     });
   })(req, res, next);
 });

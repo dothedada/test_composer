@@ -1,4 +1,4 @@
-import { postPool } from "../data/connections";
+import { postPool } from "../data/connections.js";
 
 export async function getUserPosts(username) {
   const query = `

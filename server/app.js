@@ -11,6 +11,7 @@ import { signUpRoute } from "./routes/signUp.js";
 import { configurePassport } from "./config/passport.js";
 import { loggedRoute } from "./routes/logged.js";
 import { postsRoute } from "./routes/posts.js";
+import { checkCredentials } from "./controllers/user_check.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ const app = express();
 const PORT = process.env.PORT || 6660;
 
 app.use(bodyParser.json());
+
 const allowedDomains = ["http://localhost:5173"];
 app.use(
   cors({
@@ -41,11 +43,10 @@ app.use(passport.initialize());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static("/public"));
-app.use("/api/login", loginRoute);
 app.use("/api/sign-up", signUpRoute);
+app.use("/api/login", loginRoute);
 app.use("/api/logged", loggedRoute);
-app.use();
-app.use("/api/posts", postsRoute);
+app.use("/api/posts", checkCredentials, postsRoute);
 
 app.listen(PORT, () => {
   console.log("Listening in port", PORT);
