@@ -44,4 +44,4 @@ Para facilitar la consulta, aquí tienes una lista consolidada de los comandos m
 
 FIN!!!
 
-[subir al indice](#contenidos)
+[Volver al listado de contenidos](#contenidos)
