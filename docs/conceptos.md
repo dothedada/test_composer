@@ -9,8 +9,6 @@ Al contenedorizar una aplicación, empaquetamos no solo su código, sino tambié
 * **Aislamiento:** los contenedores corren de forma independiente unos de otros, lo que permite ejecutar múltiples aplicaciones en paralelo sin que interfieran entre sí... o... relacionar varios contenedores de forma subyacente para su funcionamiento sin exponer partes que deseamos mantener privadas.
 * **Escalabilidad:** como son livianos, se pueden crear, detener o replicar rápidamente, lo cual facilita escalar aplicaciones en la nube o en entornos distribuidos.
 
-[subir al indice](#contenidos)
-
 ### Intro: Máquinas, VM y contenedores
 
 Sin entrar mucho en detalles, partiremos de que un computador es, una **máquina**, con un procesador, una RAM y un disco duro, que son administrados por un sistema operativo, sobre el cual corren nuestras aplicaciones. Estas aplicaciones solicitan recursos de memoria y cómputo a la máquina por medio del sistema operativo para ejecutarse correctamente.
@@ -25,8 +23,6 @@ Un **contenedor**, en cambio, no emula hardware ni instala un sistema operativo 
 
 > [!NOTE]
 > Desde dentro, un contenedor se "siente" como una máquina independiente, pero en realidad está compartiendo recursos del sistema anfitrión de forma segura y eficiente. Por eso, los contenedores son mucho más ligeros y rápidos que las máquinas virtuales.
-
-[subir al indice](#contenidos)
 
 ### Cómo funciona esto
 
@@ -67,8 +63,6 @@ docker volume rm --help
 ```
 
 **Si no recuerdas exactamente cómo usar algo en Docker, empieza con `--help`. Es una guía inmediata, fácil y siempre actualizada.**
-
-[subir al indice](#contenidos)
 
 #### Los planos (imágenes o _images_)
 
@@ -176,8 +170,6 @@ docker image ls
 > [!NOTE]
 > **Imagen Vs. Contenedor**: Una **imagen** es una definición de solo lectura que actúa como plantilla para crear contenedores. Un **contenedor**, en cambio, es una instancia activa basada en esa imagen, con su propio sistema de archivos de lectura-escritura, procesos y red. Es decir, la imagen es el plano; el contenedor, la ejecución real.
 
-[subir al indice](#contenidos)
-
 ##### Cosas que no queremos contenedorizar (_dockerignore_)
 
 Cuando Docker construye una imagen, al usar el comando `build`, se copian todos todos los archivos del directorio especificado en la instrucción `copy` para crear el build context. Pero no siempre queremos que todo se incluya. Así como `.gitignore` le dice a Git qué archivos no debe rastrear, el archivo `.dockerignore` le indica a Docker qué archivos debe excluir al construir una imagen. este archivo nos ayuda especificar qué debe excluirse del contexto de construcción. Con esto evitamos subir archivos pesados o irrelevantes (como node_modules o dist/), aceleramos el proceso de build y protegemos archivos sensibles como .env o claves.
@@ -191,8 +183,6 @@ dist
 .env
 .git
 ```
-
-[subir al indice](#contenidos)
 
 #### La ejecución (los contenedores)
 
@@ -266,8 +256,6 @@ docker ps -a
 ```
 
 ![ciclo de vida de un contenedor](./imgs/CicloVidaContenedor.png)
-
-[subir al indice](#contenidos)
 
 #### La memoria (los volúmenes o _volumes_)
 
@@ -397,8 +385,6 @@ docker volume prune
 #             asignados a un contenedor
 ```
 
-[subir al indice](#contenidos)
-
 #### Rendimiento y publicación
 
 Por defecto, los contenedores usan todos los recursos disponibles del host. Sin embargo, Docker permite limitar el consumo de CPU y memoria, lo cual es muy útil en entornos de producción o cuando ejecutas múltiples contenedores en la misma máquina.
@@ -437,8 +423,6 @@ docker push mi-usuario/mi-imagen:1.0.1
 
 Una vez publicada, puedes compartir esa imagen o usarla desde cualquier parte con `docker pull`
 
-[subir al indice](#contenidos)
-
 ### Dentro del contenedor (Terminal(ception) o _exec_)
 
 A veces, mientras trabajamos con una aplicación en contenedores, necesitamos _entrar_ en uno de ellos para revisar qué está pasando por dentro: mirar archivos, ejecutar un comando, explorar una carpeta o correr una migración manual. Es como hacer una especie de _inception_ del terminal: estás en tu terminal, pero saltas dentro del terminal del contenedor, sin detenerlo ni modificarlo desde fuera.
@@ -466,8 +450,6 @@ docker exec mi-contenedor env
 
 docker exec mi-contenedor node scripts/init-db.js
 ```
-
-[subir al indice](#contenidos)
 
 ### Por fuera del contenedor (Redes o _networks_)
 
@@ -510,4 +492,4 @@ docker network inspect mi-red
 
 [Siguiente: Composición y Orquestación](./composicion_y_orquestacion.md)
 
-[subir al indice](#contenidos)
+[Volver al listado de contenidos](#contenidos)
