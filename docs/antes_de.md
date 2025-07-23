@@ -1,10 +1,10 @@
-## Antes de
+# Antes de
 
 Los conceptos, marcos y flujos de trabajo que explicamos aquí son comunes a la contenedorización y pueden aplicarse con herramientas como [**Podman**](https://podman.io/) (compatible con Docker CLI, sin daemon y con enfoque en seguridad), [**containerd**](https://containerd.io/) (runtime de contenedores usado internamente por Docker) o [**CRI-O**](https://cri-o.io/) (una alternativa ligera pensada para Kubernetes). Sin embargo, como [**Docker**](https://www.docker.com/) es en este momento la herramienta más utilizada para este propósito, todos los ejemplos y fragmentos de código en esta guía estarán basados en ella.
 
 Dentro de este repositorio también puedes encontrar una aplicación simple compuesta por dos bases de datos, un servidor y un front orquestadas en docker, el archivo docker-compose.yml y los Dockerfile estan comentados explicando lo que sucede o el porqué de cada línea
 
-### Instalación
+## Instalación
 
 Antes de empezar a usar Docker en tu máquina local es importante comprender que, aunque parezca una sola aplicación, en realidad estamos interactuando con varios componentes que trabajan juntos:
 
@@ -13,9 +13,9 @@ Antes de empezar a usar Docker en tu máquina local es importante comprender que
 * **Docker Compose**: Se encarga de definir y ejecutar aplicaciones que necesitan de varios contenedores. Permite orquestar el montaje, las redes y volúmenes de forma ordenada, utilizando un único archivo de configuración (normalmente docker-compose.yml).
 * **Docker Desktop (Interfaz Gráfica)**: Es una aplicación de escritorio que integra el Docker Engine, la CLI, Docker Compose y, opcionalmente, Kubernetes. Ofrece una forma visual y simplificada de interactuar con Docker que al abrirla, suele iniciar automáticamente el servidor Docker. Es útil para monitorear el estado, ver logs o gestionar imágenes, pero no es estrictamente necesaria para usar Docker.
 
-### Paso a paso
+## Paso a paso
 
-#### Docker Desktop (si necesitas una interfaz visual)
+### Docker Desktop (si necesitas una interfaz visual)
 
 Docker Desktop es una aplicación del equipo creador de Docker que simplifica la instalacion y uso de Docker en Linux, Mac y Windows al agrupar dentro de una interfaz gráfica las aplicaciones Docker Engine, Docker CLI y Docker Compose. La simplicidad en su uso viene atada con la creación de un usuario dentro de los servidores de Docker y el cobro de servicios en casos específicos. Si sólo quieres instalar Docker para correr unos contenedores eventualmente o si tu sistema operativo es Mac o Windows, esta puede ser la opción más indicada.
 
@@ -42,7 +42,7 @@ Docker Desktop es una aplicación del equipo creador de Docker que simplifica la
     # ...
     ```
 
-#### Docker (si comprendes que es 'sudo')
+### Docker (si comprendes que es 'sudo')
 
 Si trabajas en un entorno nativo de Linux o uno virtualizado como Colima(Mac) o WSL2(Windows) y prefieres tener acceso a todas las capacidades de Docker sin necesidad de una interfaz gráfica, esta puede ser tu opción.
 
@@ -72,5 +72,4 @@ En el entorno Linux (nativo o virtualizado como Colima/WSL2):
 > activa el autocompletado de comandos de Docker en tu shell. Esto ahorra tiempo y errores al escribir. [Guía oficial aquí.](https://docs.docker.com/engine/cli/completion/)
 
 [Siguiente: Conceptos](./conceptos.md)
-
-[Volver al listado de contenidos](#contenidos)
+[Volver al listado de contenidos](../README.md#contenidos)

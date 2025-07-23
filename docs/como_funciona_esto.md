@@ -1,6 +1,8 @@
-### Cómo funciona esto
+# Conceptos
 
-#### AIUUURAAA (_--help_)
+## Cómo funciona esto
+
+### AIUUURAAA (_--help_)
 
 Uno de los comandos más útiles en Docker (y en muchas herramientas de línea de comandos) es `--help`.
 
@@ -38,7 +40,7 @@ docker volume rm --help
 
 **Si no recuerdas exactamente cómo usar algo en Docker, empieza con `--help`. Es una guía inmediata, fácil y siempre actualizada.**
 
-#### Los planos (imágenes o _images_)
+### Los planos (imágenes o _images_)
 
 Uno de los fuertes de la contenedorización es la replicabilidad y la escalabilidad, es por esto que necesitamos unos planos consistentes que permitan generar cuantos contenedores necesitemos con exactamente la misma información. Acá es donde entran las _imágenes (images)_.
 
@@ -144,7 +146,7 @@ docker image ls
 > [!NOTE]
 > **Imagen Vs. Contenedor**: Una **imagen** es una definición de solo lectura que actúa como plantilla para crear contenedores. Un **contenedor**, en cambio, es una instancia activa basada en esa imagen, con su propio sistema de archivos de lectura-escritura, procesos y red. Es decir, la imagen es el plano; el contenedor, la ejecución real.
 
-##### Cosas que no queremos contenedorizar (_dockerignore_)
+#### Cosas que no queremos contenedorizar (_dockerignore_)
 
 Cuando Docker construye una imagen, al usar el comando `build`, se copian todos todos los archivos del directorio especificado en la instrucción `copy` para crear el build context. Pero no siempre queremos que todo se incluya. Así como `.gitignore` le dice a Git qué archivos no debe rastrear, el archivo `.dockerignore` le indica a Docker qué archivos debe excluir al construir una imagen. este archivo nos ayuda especificar qué debe excluirse del contexto de construcción. Con esto evitamos subir archivos pesados o irrelevantes (como node_modules o dist/), aceleramos el proceso de build y protegemos archivos sensibles como .env o claves.
 
@@ -158,7 +160,7 @@ dist
 .git
 ```
 
-#### La ejecución (los contenedores)
+### La ejecución (los contenedores)
 
 Sólo por recordar: Un **contenedor** es una instancia en ejecución de una imagen, que proporciona un entorno aislado y ligero para ejecutar una aplicación junto con todas sus dependencias. Aunque comparte el kernel del sistema operativo del host, cada contenedor tiene su propio sistema de archivos, red y procesos, lo que permite que se comporte como si fuera una máquina independiente. Esta separación asegura que las aplicaciones se ejecuten de forma consistente.
 
@@ -231,7 +233,7 @@ docker ps -a
 
 ![ciclo de vida de un contenedor](../imgs/CicloVidaContenedor.png)
 
-#### La memoria (los volúmenes o _volumes_)
+### La memoria (los volúmenes o _volumes_)
 
 Por defecto, todo lo que ocurre dentro de un contenedor (archivos creados, bases de datos generadas, configuraciones guardadas) **se pierde al detenerlo o eliminarlo**, ya que los contenedores son efímeros y no están diseñados para conservar el estado de lo que contienen.
 
@@ -359,7 +361,7 @@ docker volume prune
 #             asignados a un contenedor
 ```
 
-#### Rendimiento y publicación
+### Rendimiento y publicación
 
 Por defecto, los contenedores usan todos los recursos disponibles del host. Sin embargo, Docker permite limitar el consumo de CPU y memoria, lo cual es muy útil en entornos de producción o cuando ejecutas múltiples contenedores en la misma máquina.
 
@@ -398,7 +400,5 @@ docker push mi-usuario/mi-imagen:1.0.1
 Una vez publicada, puedes compartir esa imagen o usarla desde cualquier parte con `docker pull`
 
 [Siguiente: Dentro del contenedor](./dentro_del_contenedor.md)
+[Volver al listado de contenidos](../README.md#contenidos)
 
-[Volver al índice](../README.md#contenidos)
-
-```

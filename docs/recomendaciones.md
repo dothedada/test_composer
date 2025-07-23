@@ -1,4 +1,4 @@
-## Recomendaciones
+# Recomendaciones
 
 * **Usa imágenes ligeras**: Opta por imágenes como `alpine` (por ejemplo, `node:18-alpine` o `python:3.9-alpine`) en tus `Dockerfile`. Son mucho más pequeñas, lo que reduce los tiempos de descarga y el uso de recursos.
 * **Mantén tus imágenes limpias**: Usa el comando `docker system prune` para limpiar imágenes, contenedores, volúmenes y redes no utilizados. Esto libera espacio en el disco duro de forma segura.

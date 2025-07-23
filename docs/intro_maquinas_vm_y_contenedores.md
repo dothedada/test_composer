@@ -1,4 +1,6 @@
-### Intro: Máquinas, VM y contenedores
+# Contenedores
+
+## Intro: Máquinas, VM y contenedores
 
 Sin entrar mucho en detalles, partiremos de que un computador es, una **máquina**, con un procesador, una RAM y un disco duro, que son administrados por un sistema operativo, sobre el cual corren nuestras aplicaciones. Estas aplicaciones solicitan recursos de memoria y cómputo a la máquina por medio del sistema operativo para ejecutarse correctamente.
 
@@ -14,5 +16,4 @@ Un **contenedor**, en cambio, no emula hardware ni instala un sistema operativo 
 > Desde dentro, un contenedor se "siente" como una máquina independiente, pero en realidad está compartiendo recursos del sistema anfitrión de forma segura y eficiente. Por eso, los contenedores son mucho más ligeros y rápidos que las máquinas virtuales.
 
 [Siguiente: Cómo funciona esto](./como_funciona_esto.md)
-
-[Volver al índice](../README.md#contenidos)
+[Volver al listado de contenidos](../README.md#contenidos)

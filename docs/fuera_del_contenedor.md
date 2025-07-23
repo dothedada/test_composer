@@ -1,4 +1,6 @@
-### Por fuera del contenedor (Redes o _networks_)
+# Conceptos
+
+## Por fuera del contenedor (Redes o _networks_)
 
 Los contenedores no están solos: aunque se ejecuten de forma aislada, muchas veces necesitan comunicarse entre sí o con el mundo exterior. Acá es donde entran las redes de Docker. Así como usamos volúmenes para mantener datos persistentes por fuera del contenedor, **usamos redes para conectarlos de forma controlada y predecible**.
 
@@ -38,7 +40,5 @@ docker network inspect mi-red
 ```
 
 [Siguiente: Composición y Orquestación](./composicion_y_orquestacion.md)
+[Volver al listado de contenidos](../README.md#contenidos)
 
-[Volver al índice](../README.md#contenidos)
-
-```

@@ -1,8 +1,8 @@
-## Resumen de Comandos
+# Resumen de Comandos
 
 Para facilitar la consulta, aquí tienes una lista consolidada de los comandos más importantes que hemos visto a lo largo de esta guía:
 
-### Gestión de Imágenes
+## Gestión de Imágenes
 
 * `docker images` o `docker image ls`: Muestra las imágenes disponibles.
 * `docker pull [imagen]`: Descarga una imagen desde un registro.
@@ -11,7 +11,7 @@ Para facilitar la consulta, aquí tienes una lista consolidada de los comandos m
 * `docker push [imagen]`: Publica una imagen en un registro.
 * `docker rmi [imagen]`: Borra una imagen.
 
-### Gestión de Contenedores
+## Gestión de Contenedores
 
 * `docker run [imagen]`: Crea y ejecuta un contenedor.
 * `docker run -d [imagen]`: Ejecuta el contenedor en segundo plano (`detached`).
@@ -25,7 +25,7 @@ Para facilitar la consulta, aquí tienes una lista consolidada de los comandos m
 * `docker rm [id/nombre]`: Borra un contenedor (si no está en ejecución).
 * `docker exec -it [id/nombre] /bin/sh`: Entra en una terminal dentro del contenedor.
 
-### Gestión de Volúmenes y Redes
+## Gestión de Volúmenes y Redes
 
 * `docker volume ls`: Lista los volúmenes.
 * `docker volume create [nombre]`: Crea un volumen con nombre.
@@ -35,7 +35,7 @@ Para facilitar la consulta, aquí tienes una lista consolidada de los comandos m
 * `docker network create [nombre]`: Crea una red personalizada.
 * `docker run --network [nombre-red] [imagen]`: Conecta un contenedor a una red.
 
-### Docker Compose
+## Docker Compose
 
 * `docker compose up -d`: Inicia el stack de servicios en segundo plano.
 * `docker compose down`: Detiene y elimina los servicios.
@@ -44,4 +44,4 @@ Para facilitar la consulta, aquí tienes una lista consolidada de los comandos m
 
 FIN!!!
 
-[Volver al listado de contenidos](#contenidos)
+[Volver al listado de contenidos](../README.md#contenidos)

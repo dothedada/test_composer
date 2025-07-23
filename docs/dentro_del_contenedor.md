@@ -1,4 +1,6 @@
-### Dentro del contenedor (Terminal(ception) o _exec_)
+# Conceptos
+
+## Dentro del contenedor (Terminal(ception) o _exec_)
 
 A veces, mientras trabajamos con una aplicación en contenedores, necesitamos _entrar_ en uno de ellos para revisar qué está pasando por dentro: mirar archivos, ejecutar un comando, explorar una carpeta o correr una migración manual. Es como hacer una especie de _inception_ del terminal: estás en tu terminal, pero saltas dentro del terminal del contenedor, sin detenerlo ni modificarlo desde fuera.
 
@@ -27,5 +29,4 @@ docker exec mi-contenedor node scripts/init-db.js
 ```
 
 [Siguiente: Por fuera del contenedor](./fuera_del_contenedor.md)
-
-[Volver al índice](../README.md#contenidos)
+[Volver al listado de contenidos](../README.md#contenidos)
