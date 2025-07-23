@@ -1,3 +1,7 @@
+# Conceptos
+
+## Cómo funciona esto
+
 ### La memoria (los volúmenes o _volumes_)
 
 Por defecto, todo lo que ocurre dentro de un contenedor (archivos creados, bases de datos generadas, configuraciones guardadas) **se pierde al detenerlo o eliminarlo**, ya que los contenedores son efímeros y no están diseñados para conservar el estado de lo que contienen.
@@ -128,4 +132,4 @@ docker volume prune
 
 [Siguiente: Rendimiento y publicación](./rendimiento_y_publicacion.md)
 
-[Volver al índice](../README.md#contenidos)
+[Volver al listado de contenidos](../README.md#contenidos)

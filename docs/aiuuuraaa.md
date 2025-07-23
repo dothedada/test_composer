@@ -1,3 +1,6 @@
+# Conceptos
+
+## Cómo funciona esto
 
 ### AIUUURAAA (_--help_)
 

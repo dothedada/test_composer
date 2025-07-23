@@ -15,9 +15,9 @@ La idea detrás de las herramientas de contenedorización es permitirnos empaque
     * [Paso a paso](./docs/antes_de.md#paso-a-paso)
 
 2. [Conceptos](./docs/conceptos.md)
-    * [¿Para qué la contenedorización?](./docs/conceptos.md#para-qué-la-contenedorización)
+    * [¿Para qué la contenedorización?](./docs/conceptos.md)
     * [Intro: Máquinas, VM y Contenedores](./docs/intro_maquinas_vm_y_contenedores.md)
-    * [¿Cómo funciona esto?](./docs/como_funciona_esto.md)
+    * ¿Cómo funciona esto?
         * [AIUUURAAA (_--help_)](./docs/aiuuuraaa.md)
         * [Los planos (imágenes o _images_)](./docs/los_planos.md)
         * [La ejecución (los contenedores)](./docs/la_ejecucion.md)
@@ -37,3 +37,4 @@ La idea detrás de las herramientas de contenedorización es permitirnos empaque
     * [Gestión de Contenedores](./docs/resumen_de_comandos.md#gestión-de-contenedores)
     * [Gestión de Volúmenes y Redes](./docs/resumen_de_comandos.md#gestión-de-volúmenes-y-redes)
     * [Gestion de Composiciones](./docs/resumen_de_comandos.md#docker-compose)
+

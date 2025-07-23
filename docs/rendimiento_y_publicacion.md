@@ -1,3 +1,7 @@
+# Conceptos
+
+## Cómo funciona esto
+
 ### Rendimiento y publicación
 
 Por defecto, los contenedores usan todos los recursos disponibles del host. Sin embargo, Docker permite limitar el consumo de CPU y memoria, lo cual es muy útil en entornos de producción o cuando ejecutas múltiples contenedores en la misma máquina.
@@ -38,4 +42,4 @@ Una vez publicada, puedes compartir esa imagen o usarla desde cualquier parte co
 
 [Siguiente: Dentro del contenedor](./dentro_del_contenedor.md)
 
-[Volver al índice](../README.md#contenidos)
+[Volver al listado de contenidos](../README.md#contenidos)

@@ -1,3 +1,7 @@
+# Conceptos
+
+## Cómo funciona esto
+
 ### Los planos (imágenes o _images_)
 
 Uno de los fuertes de la contenedorización es la replicabilidad y la escalabilidad, es por esto que necesitamos unos planos consistentes que permitan generar cuantos contenedores necesitemos con exactamente la misma información. Acá es donde entran las _imágenes (images)_.
@@ -120,4 +124,4 @@ dist
 
 [Siguiente: La ejecución (los contenedores)](./la_ejecucion.md)
 
-[Volver al índice](../README.md#contenidos)
+[Volver al listado de contenidos](../README.md#contenidos)

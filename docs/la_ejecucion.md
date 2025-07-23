@@ -1,3 +1,7 @@
+# Conceptos
+
+## Cómo funciona esto
+
 ### La ejecución (los contenedores)
 
 Sólo por recordar: Un **contenedor** es una instancia en ejecución de una imagen, que proporciona un entorno aislado y ligero para ejecutar una aplicación junto con todas sus dependencias. Aunque comparte el kernel del sistema operativo del host, cada contenedor tiene su propio sistema de archivos, red y procesos, lo que permite que se comporte como si fuera una máquina independiente. Esta separación asegura que las aplicaciones se ejecuten de forma consistente.
@@ -73,4 +77,4 @@ docker ps -a
 
 [Siguiente: La memoria (los volúmenes o _volumes_)](./la_memoria.md)
 
-[Volver al índice](../README.md#contenidos)
+[Volver al listado de contenidos](../README.md#contenidos)
