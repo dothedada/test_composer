@@ -9,4 +9,4 @@
 
 [Siguiente: Resumen de Comandos](./resumen_de_comandos.md)
 
-[Volver al listado de contenidos](#contenidos)
+[Volver al listado de contenidos](../README.md#contenidos)
