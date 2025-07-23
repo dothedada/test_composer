@@ -15,11 +15,11 @@ Sin entrar mucho en detalles, partiremos de que un computador es, una **máquina
 
 Una **máquina virtual (VM - Virtual Machines)** emula todo el hardware de un computador. Esto permite instalar un sistema operativo completo dentro de otro, como si fuese un computador dentro de otro y usar los recursos del computador donde corre de forma compartida con otras VM. Cada VM tiene su propio kernel, su propio sistema de archivos y acceso virtualizado a recursos como red, disco o CPU. Esto garantiza un entorno completamente aislado, pero con un costo: levantar una VM implica cargar un sistema operativo completo, lo cual consume más tiempo y recursos.
 
-![arquitectura de una máquina virtual](./imgs/ArquitecturaVM.png)
+![arquitectura de una máquina virtual](../imgs/ArquitecturaVM.png)
 
 Un **contenedor**, en cambio, no emula hardware ni instala un sistema operativo completo. Contenedoriza una aplicación junto con sus dependencias y la ejecuta directamente sobre el sistema operativo del de la máquina, compartiendo el mismo kernel. Cada contenedor se ejecuta en un entorno aislado gracias a mecanismos como _namespaces_ (para separar procesos, red, usuarios, etc.) y _cgroups_ (para limitar el uso de recursos).
 
-![arquitectura de la contenedorizacion](./imgs/ArquitecturaContenerizador.png)
+![arquitectura de la contenedorizacion](../imgs/ArquitecturaContenerizador.png)
 
 > [!NOTE]
 > Desde dentro, un contenedor se "siente" como una máquina independiente, pero en realidad está compartiendo recursos del sistema anfitrión de forma segura y eficiente. Por eso, los contenedores son mucho más ligeros y rápidos que las máquinas virtuales.
@@ -137,7 +137,7 @@ CMD ["npm", "start"]
 
 El orden de los comandos en un `Dockerfile` es clave porque Docker construye la imagen paso a paso y guarda una **capa intermedia en caché** después de cada instrucción. Si un paso no ha cambiado desde la última vez, Docker reutiliza la capa en lugar de rehacerla, lo que acelera la construcción. Por eso en nuestro ejemplo (y como buena práctica) colocamos primero los pasos menos propensos a cambiar, como `COPY package*.json ./` y `RUN npm install`, antes de copiar el resto del código. Así, si solo cambias los archivos fuente pero no las dependencias, Docker podrá aprovechar el cache y evitar reinstalar todo, haciendo el proceso mucho más eficiente.
 
-![Las capas constitutivas de una imagen](./imgs/CapasImagen.png)
+![Las capas constitutivas de una imagen](../imgs/CapasImagen.png)
 
 una vez tenemos nuestro `Dockerfile`, podemos crear la imagen para nuestro contenedor desde el directorio donde se encuentra el archivo.
 
@@ -255,7 +255,7 @@ docker kill 941ad3dddd8f
 docker ps -a 
 ```
 
-![ciclo de vida de un contenedor](./imgs/CicloVidaContenedor.png)
+![ciclo de vida de un contenedor](../imgs/CicloVidaContenedor.png)
 
 #### La memoria (los volúmenes o _volumes_)
 
