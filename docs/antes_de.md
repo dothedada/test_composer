@@ -72,4 +72,5 @@ En el entorno Linux (nativo o virtualizado como Colima/WSL2):
 > activa el autocompletado de comandos de Docker en tu shell. Esto ahorra tiempo y errores al escribir. [Guía oficial aquí.](https://docs.docker.com/engine/cli/completion/)
 
 [Siguiente: Conceptos](./conceptos.md)
+
 [Volver al listado de contenidos](../README.md#contenidos)

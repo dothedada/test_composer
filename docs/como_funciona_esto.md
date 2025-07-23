@@ -400,5 +400,6 @@ docker push mi-usuario/mi-imagen:1.0.1
 Una vez publicada, puedes compartir esa imagen o usarla desde cualquier parte con `docker pull`
 
 [Siguiente: Dentro del contenedor](./dentro_del_contenedor.md)
+
 [Volver al listado de contenidos](../README.md#contenidos)
 

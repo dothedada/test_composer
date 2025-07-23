@@ -29,4 +29,5 @@ docker exec mi-contenedor node scripts/init-db.js
 ```
 
 [Siguiente: Por fuera del contenedor](./fuera_del_contenedor.md)
+
 [Volver al listado de contenidos](../README.md#contenidos)

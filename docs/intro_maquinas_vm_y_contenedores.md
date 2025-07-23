@@ -16,4 +16,5 @@ Un **contenedor**, en cambio, no emula hardware ni instala un sistema operativo 
 > Desde dentro, un contenedor se "siente" como una máquina independiente, pero en realidad está compartiendo recursos del sistema anfitrión de forma segura y eficiente. Por eso, los contenedores son mucho más ligeros y rápidos que las máquinas virtuales.
 
 [Siguiente: Cómo funciona esto](./como_funciona_esto.md)
+
 [Volver al listado de contenidos](../README.md#contenidos)

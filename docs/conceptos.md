@@ -10,5 +10,6 @@ Al contenedorizar una aplicación, empaquetamos no solo su código, sino tambié
 * **Escalabilidad:** como son livianos, se pueden crear, detener o replicar rápidamente, lo cual facilita escalar aplicaciones en la nube o en entornos distribuidos.
 
 [Siguiente: Intro: Máquinas, VM y contenedores](./intro_maquinas_vm_y_contenedores.md)
+
 [Volver al listado de contenidos](../README.md#contenidos)
 
