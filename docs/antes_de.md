@@ -4,8 +4,6 @@ Los conceptos, marcos y flujos de trabajo que explicamos aquí son comunes a la 
 
 Dentro de este repositorio también puedes encontrar una aplicación simple compuesta por dos bases de datos, un servidor y un front orquestadas en docker, el archivo docker-compose.yml y los Dockerfile estan comentados explicando lo que sucede o el porqué de cada línea
 
-[subir al indice](#contenidos)
-
 ### Instalación
 
 Antes de empezar a usar Docker en tu máquina local es importante comprender que, aunque parezca una sola aplicación, en realidad estamos interactuando con varios componentes que trabajan juntos:
@@ -14,8 +12,6 @@ Antes de empezar a usar Docker en tu máquina local es importante comprender que
 * **La Interfaz de Línea de Comandos (Docker CLI)**: Es la herramienta principal de interacción con Docker. Aunque existan interfaces gráficas, la mayoría de las operaciones y comandos de Docker se ejecutan directamente desde la terminal.
 * **Docker Compose**: Se encarga de definir y ejecutar aplicaciones que necesitan de varios contenedores. Permite orquestar el montaje, las redes y volúmenes de forma ordenada, utilizando un único archivo de configuración (normalmente docker-compose.yml).
 * **Docker Desktop (Interfaz Gráfica)**: Es una aplicación de escritorio que integra el Docker Engine, la CLI, Docker Compose y, opcionalmente, Kubernetes. Ofrece una forma visual y simplificada de interactuar con Docker que al abrirla, suele iniciar automáticamente el servidor Docker. Es útil para monitorear el estado, ver logs o gestionar imágenes, pero no es estrictamente necesaria para usar Docker.
-
-[subir al indice](#contenidos)
 
 ### Paso a paso
 
@@ -50,6 +46,7 @@ Docker Desktop es una aplicación del equipo creador de Docker que simplifica la
 
 Si trabajas en un entorno nativo de Linux o uno virtualizado como Colima(Mac) o WSL2(Windows) y prefieres tener acceso a todas las capacidades de Docker sin necesidad de una interfaz gráfica, esta puede ser tu opción.
 
+> [!WARN]
 > Pre-requisitos (si estás en macOS o Windows):
 >
 > * macOS: Asegúrate de tener Colima instalado e iniciado. Colima creará una pequeña máquina virtual Linux donde Docker Engine se ejecutará.
@@ -76,4 +73,4 @@ En el entorno Linux (nativo o virtualizado como Colima/WSL2):
 
 [Siguiente: Conceptos](./conceptos.md)
 
-[subir al indice](#contenidos)
+[Volver al listado de contenidos](#contenidos)
