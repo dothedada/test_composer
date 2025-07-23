@@ -46,7 +46,7 @@ Docker Desktop es una aplicación del equipo creador de Docker que simplifica la
 
 Si trabajas en un entorno nativo de Linux o uno virtualizado como Colima(Mac) o WSL2(Windows) y prefieres tener acceso a todas las capacidades de Docker sin necesidad de una interfaz gráfica, esta puede ser tu opción.
 
-> [!WARN]
+> [!NOTE]
 > Pre-requisitos (si estás en macOS o Windows):
 >
 > * macOS: Asegúrate de tener Colima instalado e iniciado. Colima creará una pequeña máquina virtual Linux donde Docker Engine se ejecutará.
